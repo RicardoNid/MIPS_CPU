@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<build-config version="2">
+    <current-build-name/>
+    <design-hierarchy-top language="VLOG">16384'work.128'minimips.DEFAULT_CONFIG'minimips</design-hierarchy-top>
+    <design-hierarchy-top-elab language="VLOG"/>
+    <verification-hierarchy-top language=""/>
+</build-config>
