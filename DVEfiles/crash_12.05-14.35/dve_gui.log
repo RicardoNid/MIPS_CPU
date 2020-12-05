@@ -1,0 +1,345 @@
+Chronologic VCS simulator copyright 1991-2016
+Contains Synopsys proprietary information.
+Compiler version L-2016.06_Full64; Runtime version L-2016.06_Full64;  Dec  5 14:14 2020
+VCD+ Writer L-2016.06_Full64 Copyright (c) 1991-2016 by Synopsys Inc.
+The file '/mnt/c/MIPS_CPU/inter.vpd' was opened successfully.
+dve> run
+
+Warning-[RT-NCMUCS] No condition matches in statement
+stage_id.sv, 202
+  No condition matches in 'unique case' statement. 'default' specification is 
+  missing, inside minimips_tb.dut.u_stage_id, at time 0ns.
+
+
+Warning-[RT-NCMUCS] No condition matches in statement
+stage_id.sv, 214
+  No condition matches in 'unique case' statement. 'default' specification is 
+  missing, inside minimips_tb.dut.u_stage_id, at time 0ns.
+
+
+Warning-[RT-NCMUCS] No condition matches in statement
+stage_id.sv, 305
+  No condition matches in 'unique case' statement. 'default' specification is 
+  missing, inside minimips_tb.dut.u_stage_id, at time 0ns.
+
+
+Warning-[RT-NCMUCS] No condition matches in statement
+stage_id.sv, 310
+  No condition matches in 'unique case' statement. 'default' specification is 
+  missing, inside minimips_tb.dut.u_stage_id, at time 0ns.
+
+
+Warning-[RT-NCMUCS] No condition matches in statement
+stage_id.sv, 202
+  No condition matches in 'unique case' statement. 'default' specification is 
+  missing, inside minimips_tb.dut.u_stage_id, at time 0ns.
+
+
+Warning-[RT-NCMUCS] No condition matches in statement
+stage_id.sv, 214
+  No condition matches in 'unique case' statement. 'default' specification is 
+  missing, inside minimips_tb.dut.u_stage_id, at time 0ns.
+
+
+Warning-[RT-NCMUCS] No condition matches in statement
+stage_id.sv, 259
+  No condition matches in 'unique case' statement. 'default' specification is 
+  missing, inside minimips_tb.dut.u_stage_id, at time 0ns.
+
+
+Warning-[RT-NCMUCS] No condition matches in statement
+stage_id.sv, 305
+  No condition matches in 'unique case' statement. 'default' specification is 
+  missing, inside minimips_tb.dut.u_stage_id, at time 0ns.
+
+
+Warning-[RT-NCMUCS] No condition matches in statement
+stage_id.sv, 310
+  No condition matches in 'unique case' statement. 'default' specification is 
+  missing, inside minimips_tb.dut.u_stage_id, at time 0ns.
+
+
+Warning-[RT-NCMUCS] No condition matches in statement
+stage_exe.sv, 51
+  No condition matches in 'unique case' statement. 'default' specification is 
+  missing, inside minimips_tb.dut.u_stage_exe, at time 0ns.
+
+
+Warning-[RT-NCMUCS] No condition matches in statement
+stage_exe.sv, 57
+  No condition matches in 'unique case' statement. 'default' specification is 
+  missing, inside minimips_tb.dut.u_stage_exe, at time 0ns.
+
+
+Warning-[RT-NCMUCS] No condition matches in statement
+stage_exe.sv, 63
+  No condition matches in 'unique case' statement. 'default' specification is 
+  missing, inside minimips_tb.dut.u_stage_exe, at time 0ns.
+
+
+Warning-[RT-NCMUCS] No condition matches in statement
+stage_mem.sv, 45
+  No condition matches in 'unique case' statement. 'default' specification is 
+  missing, inside minimips_tb.dut.u_stage_mem, at time 0ns.
+
+
+Warning-[RT-NCMUCS] No condition matches in statement
+decode.sv, 12
+  No condition matches in 'unique case' statement. 'default' specification is 
+  missing, inside decode, at time 0ns.
+
+
+Warning-[RT-NCMUCS] No condition matches in statement
+stage_id.sv, 202
+  No condition matches in 'unique case' statement. 'default' specification is 
+  missing, inside minimips_tb.dut.u_stage_id, at time 10ns.
+
+
+Warning-[RT-NCMUCS] No condition matches in statement
+stage_id.sv, 214
+  No condition matches in 'unique case' statement. 'default' specification is 
+  missing, inside minimips_tb.dut.u_stage_id, at time 10ns.
+
+
+Warning-[RT-NCMUCS] No condition matches in statement
+stage_id.sv, 305
+  No condition matches in 'unique case' statement. 'default' specification is 
+  missing, inside minimips_tb.dut.u_stage_id, at time 10ns.
+
+
+Warning-[RT-NCMUCS] No condition matches in statement
+stage_id.sv, 310
+  No condition matches in 'unique case' statement. 'default' specification is 
+  missing, inside minimips_tb.dut.u_stage_id, at time 10ns.
+
+
+Warning-[RT-NCMUCS] No condition matches in statement
+stage_exe.sv, 51
+  No condition matches in 'unique case' statement. 'default' specification is 
+  missing, inside minimips_tb.dut.u_stage_exe, at time 15ns.
+
+
+Warning-[RT-NCMUCS] No condition matches in statement
+stage_exe.sv, 57
+  No condition matches in 'unique case' statement. 'default' specification is 
+  missing, inside minimips_tb.dut.u_stage_exe, at time 15ns.
+
+
+Warning-[RT-NCMUCS] No condition matches in statement
+stage_exe.sv, 63
+  No condition matches in 'unique case' statement. 'default' specification is 
+  missing, inside minimips_tb.dut.u_stage_exe, at time 15ns.
+
+
+Warning-[RT-NCMUCS] No condition matches in statement
+stage_mem.sv, 45
+  No condition matches in 'unique case' statement. 'default' specification is 
+  missing, inside minimips_tb.dut.u_stage_mem, at time 25ns.
+
+dve> restart
+Chronologic VCS simulator copyright 1991-2016
+Contains Synopsys proprietary information.
+Compiler version L-2016.06_Full64; Runtime version L-2016.06_Full64;  Dec  5 14:17 2020
+VCD+ Writer L-2016.06_Full64 Copyright (c) 1991-2016 by Synopsys Inc.
+The file '/mnt/c/MIPS_CPU/inter.vpd' was opened successfully.
+dve> run 1000
+1000 ns
+
+Warning-[RT-NCMUCS] No condition matches in statement
+stage_id.sv, 202
+  No condition matches in 'unique case' statement. 'default' specification is 
+  missing, inside minimips_tb.dut.u_stage_id, at time 0ns.
+
+
+Warning-[RT-NCMUCS] No condition matches in statement
+stage_id.sv, 214
+  No condition matches in 'unique case' statement. 'default' specification is 
+  missing, inside minimips_tb.dut.u_stage_id, at time 0ns.
+
+
+Warning-[RT-NCMUCS] No condition matches in statement
+stage_id.sv, 305
+  No condition matches in 'unique case' statement. 'default' specification is 
+  missing, inside minimips_tb.dut.u_stage_id, at time 0ns.
+
+
+Warning-[RT-NCMUCS] No condition matches in statement
+stage_id.sv, 310
+  No condition matches in 'unique case' statement. 'default' specification is 
+  missing, inside minimips_tb.dut.u_stage_id, at time 0ns.
+
+
+Warning-[RT-NCMUCS] No condition matches in statement
+stage_id.sv, 202
+  No condition matches in 'unique case' statement. 'default' specification is 
+  missing, inside minimips_tb.dut.u_stage_id, at time 0ns.
+
+
+Warning-[RT-NCMUCS] No condition matches in statement
+stage_id.sv, 214
+  No condition matches in 'unique case' statement. 'default' specification is 
+  missing, inside minimips_tb.dut.u_stage_id, at time 0ns.
+
+
+Warning-[RT-NCMUCS] No condition matches in statement
+stage_id.sv, 259
+  No condition matches in 'unique case' statement. 'default' specification is 
+  missing, inside minimips_tb.dut.u_stage_id, at time 0ns.
+
+
+Warning-[RT-NCMUCS] No condition matches in statement
+stage_id.sv, 305
+  No condition matches in 'unique case' statement. 'default' specification is 
+  missing, inside minimips_tb.dut.u_stage_id, at time 0ns.
+
+
+Warning-[RT-NCMUCS] No condition matches in statement
+stage_id.sv, 310
+  No condition matches in 'unique case' statement. 'default' specification is 
+  missing, inside minimips_tb.dut.u_stage_id, at time 0ns.
+
+
+Warning-[RT-NCMUCS] No condition matches in statement
+stage_exe.sv, 51
+  No condition matches in 'unique case' statement. 'default' specification is 
+  missing, inside minimips_tb.dut.u_stage_exe, at time 0ns.
+
+
+Warning-[RT-NCMUCS] No condition matches in statement
+stage_exe.sv, 57
+  No condition matches in 'unique case' statement. 'default' specification is 
+  missing, inside minimips_tb.dut.u_stage_exe, at time 0ns.
+
+
+Warning-[RT-NCMUCS] No condition matches in statement
+stage_exe.sv, 63
+  No condition matches in 'unique case' statement. 'default' specification is 
+  missing, inside minimips_tb.dut.u_stage_exe, at time 0ns.
+
+
+Warning-[RT-NCMUCS] No condition matches in statement
+stage_mem.sv, 45
+  No condition matches in 'unique case' statement. 'default' specification is 
+  missing, inside minimips_tb.dut.u_stage_mem, at time 0ns.
+
+
+Warning-[RT-NCMUCS] No condition matches in statement
+decode.sv, 12
+  No condition matches in 'unique case' statement. 'default' specification is 
+  missing, inside decode, at time 0ns.
+
+
+Warning-[RT-NCMUCS] No condition matches in statement
+stage_id.sv, 202
+  No condition matches in 'unique case' statement. 'default' specification is 
+  missing, inside minimips_tb.dut.u_stage_id, at time 10ns.
+
+
+Warning-[RT-NCMUCS] No condition matches in statement
+stage_id.sv, 214
+  No condition matches in 'unique case' statement. 'default' specification is 
+  missing, inside minimips_tb.dut.u_stage_id, at time 10ns.
+
+
+Warning-[RT-NCMUCS] No condition matches in statement
+stage_id.sv, 305
+  No condition matches in 'unique case' statement. 'default' specification is 
+  missing, inside minimips_tb.dut.u_stage_id, at time 10ns.
+
+
+Warning-[RT-NCMUCS] No condition matches in statement
+stage_id.sv, 310
+  No condition matches in 'unique case' statement. 'default' specification is 
+  missing, inside minimips_tb.dut.u_stage_id, at time 10ns.
+
+
+Warning-[RT-NCMUCS] No condition matches in statement
+stage_exe.sv, 51
+  No condition matches in 'unique case' statement. 'default' specification is 
+  missing, inside minimips_tb.dut.u_stage_exe, at time 15ns.
+
+
+Warning-[RT-NCMUCS] No condition matches in statement
+stage_exe.sv, 57
+  No condition matches in 'unique case' statement. 'default' specification is 
+  missing, inside minimips_tb.dut.u_stage_exe, at time 15ns.
+
+
+Warning-[RT-NCMUCS] No condition matches in statement
+stage_exe.sv, 63
+  No condition matches in 'unique case' statement. 'default' specification is 
+  missing, inside minimips_tb.dut.u_stage_exe, at time 15ns.
+
+
+Warning-[RT-NCMUCS] No condition matches in statement
+stage_mem.sv, 45
+  No condition matches in 'unique case' statement. 'default' specification is 
+  missing, inside minimips_tb.dut.u_stage_mem, at time 25ns.
+
+---------------------------------------------
+
+The tool has just exited abnormally:
+
+
+Release = 'L-2016.06_Full64'  Architecture = 'amd64'  Program = 'DVE'
+
+'33398273 33435466 33437347 140210948071449'
+
+---------------------------------------------
+=======================DVE Context and Call Stack=========================
+Command line: /usr/synopsys/vcs-L-2016.06//gui/dve/linux64/bin/dve.exe -full64 -ucliplatform=amd64 -toolargs "-ucligui -toolexe ./simv -a simv.log  -pid 13762" -toolin /tmp/vcs_20201205061437_13761_root..stdin -toolout /tmp/vcs_20201205061437_13761_root..stdout
+
+--- Stack trace follows:
+
+warning: Could not load shared library symbols for linux-vdso.so.1.
+Do you need "set solib-search-path" or "set sysroot"?
+[New LWP 14041]
+[New LWP 14038]
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib/x86_64-linux-gnu/libthread_db.so.1".
+0x00007f8567caf722 in waitpid () from /lib/x86_64-linux-gnu/libc.so.6
+
+Thread 3 (Thread 0x7f85631f3700 (LWP 14038)):
+#0  0x00007f856954af85 in pthread_cond_timedwait@@GLIBC_2.3.2 () from /lib/x86_64-linux-gnu/libpthread.so.0
+#1  0x000000000291005b in ?? ()
+#2  0x00000000029104ee in QThread::msleep(unsigned long) ()
+#3  0x0000000001120a06 in ag::dveXThread::run() ()
+#4  0x00000000029101ea in QThreadInstance::start(void*) ()
+#5  0x00007f85695446db in start_thread () from /lib/x86_64-linux-gnu/libpthread.so.0
+#6  0x00007f8567ceca3f in clone () from /lib/x86_64-linux-gnu/libc.so.6
+
+Thread 2 (Thread 0x7f85629f2700 (LWP 14041)):
+#0  0x00007f8567cdb1c4 in read () from /lib/x86_64-linux-gnu/libc.so.6
+#1  0x00007f8567c581b8 in _IO_file_underflow () from /lib/x86_64-linux-gnu/libc.so.6
+#2  0x00007f8567c59462 in _IO_default_uflow () from /lib/x86_64-linux-gnu/libc.so.6
+#3  0x00007f8567c4aed2 in _IO_getline () from /lib/x86_64-linux-gnu/libc.so.6
+#4  0x00007f8567c49c3d in fgets () from /lib/x86_64-linux-gnu/libc.so.6
+#5  0x000000000123ba33 in ag::dveSmlSocket::run() ()
+#6  0x00000000029101ea in QThreadInstance::start(void*) ()
+#7  0x00007f85695446db in start_thread () from /lib/x86_64-linux-gnu/libpthread.so.0
+#8  0x00007f8567ceca3f in clone () from /lib/x86_64-linux-gnu/libc.so.6
+
+Thread 1 (Thread 0x7f856b4afcc0 (LWP 13773)):
+#0  0x00007f8567caf722 in waitpid () from /lib/x86_64-linux-gnu/libc.so.6
+#1  0x00007f8567c1a107 in ?? () from /lib/x86_64-linux-gnu/libc.so.6
+#2  0x00007f856aa646f8 in SNPSle_10ee25eff68cd8461c9146fa1d0b35e87067f3c8015b313e639d2928478c79b3f673f99203bcf8be64600612100082236bffb2007f1e0ef9 () from /usr/synopsys/vcs-L-2016.06//linux64/lib/liberrorinf.so
+#3  0x00007f856aa64c8d in SNPSle_10ee25eff68cd8461c9146fa1d0b35e87067f3c8015b313e81c34e9ac4c8988ef4a6e067b3aa9271e9f15440f9e8f69ebc77e2fd65860faa () from /usr/synopsys/vcs-L-2016.06//linux64/lib/liberrorinf.so
+#4  0x00007f856aa65f85 in SNPSle_10ee25eff68cd8461c9146fa1d0b35e87067f3c8015b313efba706aab251478fa49e66610e453774633a6c152e7ef778f2202cda681f3d4e () from /usr/synopsys/vcs-L-2016.06//linux64/lib/liberrorinf.so
+#5  0x00007f856aa5ef15 in SNPSle_d35ca1ff70d465c2b9b1a72eee90a506fdd009d3de3db1de () from /usr/synopsys/vcs-L-2016.06//linux64/lib/liberrorinf.so
+#6  0x0000000001fe2ef5 in ag::logErrorMessage(ag::errorType, QString const&, bool) ()
+#7  0x0000000001fe36a3 in ?? ()
+#8  0x00007f8567c0e019 in ?? () from /lib/x86_64-linux-gnu/libc.so.6
+#9  0x00007f8567c0e1ea in exit () from /lib/x86_64-linux-gnu/libc.so.6
+#10 0x00000000028bbdec in ?? ()
+#11 0x00007f8568bd395e in _XIOError () from /usr/lib/x86_64-linux-gnu/libX11.so.6
+#12 0x00007f8568bd11ed in _XEventsQueued () from /usr/lib/x86_64-linux-gnu/libX11.so.6
+#13 0x00007f8568bc2ced in XPending () from /usr/lib/x86_64-linux-gnu/libX11.so.6
+#14 0x00000000028d8fac in QEventLoop::processEvents(unsigned int) ()
+#15 0x0000000001162491 in ag::ovaEventLoop::processEvents(unsigned int) ()
+#16 0x0000000002926999 in QEventLoop::enterLoop() ()
+#17 0x00000000029268fa in QEventLoop::exec() ()
+#18 0x0000000001161e07 in run_cci_event_loop ()
+#19 0x00000000011215d4 in ag::ovaAppInst::enterEventLoop(int, char**) ()
+#20 0x0000000000db7e79 in main ()
+No context available
+==========================================================================

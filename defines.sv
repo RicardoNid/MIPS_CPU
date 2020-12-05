@@ -28,11 +28,11 @@ package mips_cpu_pkg;
         SHIFT = 4'b1000
     } alutype_enum;
 
-    typedef enum logic [2 : 0] {ALU_MULT, ALU_DIV} mult_op_enum;
-    typedef enum logic [2 : 0] {ALU_ADD, ALU_SUB, ALU_GT, ALU_GE, ALU_LT, ALU_LE, ALU_EQ} arith_op_enum;
-    typedef enum logic [2 : 0] {ALU_AND, ALU_OR, ALU_XOR} logic_op_enum;
-    typedef enum logic [2 : 0] {ALU_HI, ALU_LO} move_op_enum;
-    typedef enum logic [2 : 0] {ALU_LL, ALU_RL, ALU_RA} shift_op_enum;
+    typedef enum logic [1 : 0] {ALU_MULT, ALU_DIV} mult_op_enum;
+    typedef enum logic [1 : 0] {ALU_ADD, ALU_SUB, ALU_LT} arith_op_enum;
+    typedef enum logic [1 : 0] {ALU_AND, ALU_OR, ALU_XOR, ALU_NOR} logic_op_enum;
+    typedef enum logic [1 : 0] {ALU_HI, ALU_LO} move_op_enum;
+    typedef enum logic [1 : 0] {ALU_LL, ALU_RL, ALU_RA} shift_op_enum;
 
     typedef union packed{
         mult_op_enum mult_op;
@@ -46,7 +46,6 @@ package mips_cpu_pkg;
     typedef struct packed {
         aluop_t op;
         logic sign;
-        logic error;
     } aluop_struct;
 
     localparam ALUOP_ZERO     = 5'b00000;
@@ -61,6 +60,7 @@ package mips_cpu_pkg;
         logic sign;
     } memop_struct;
 
+    // todo : step-1 - opcode/func
     typedef enum logic [5 : 0] {
         // alu
         ADDI  = 6'b001000,

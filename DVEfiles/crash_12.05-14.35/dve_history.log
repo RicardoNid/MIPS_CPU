@@ -1,0 +1,93 @@
+# Preference setting overrides
+gui_create_pref_key -category {Globals} -key {load_detail_for_funcov} -value_type {bool} -value {false}
+gui_create_pref_category -category {schem_obj_name}
+gui_create_pref_key -category {schem_obj_name} -key {show_cell_and_pin_with_symbol_name} -value_type {bool} -value {false}
+gui_create_pref_key -category {schem_pin_hc} -key {textExtFont} -value_type {string} -value {Helvetica,10,-1,5,50,0,0,0,0,0}
+
+# State setting overrides
+gui_state_default_create -off -ini
+gui_set_state_value -category Layout -key child_console_size_x -value 2552
+gui_set_state_value -category Layout -key child_console_size_y -value 172
+gui_set_state_value -category Layout -key child_data_size_x -value 167
+gui_set_state_value -category Layout -key child_data_size_y -value 1122
+gui_set_state_value -category Layout -key child_hier_col3 -value {-1}
+gui_set_state_value -category Layout -key child_hier_colpd -value 0
+gui_set_state_value -category Layout -key child_hier_size_x -value 167
+gui_set_state_value -category Layout -key child_hier_size_y -value 1122
+gui_set_state_value -category Layout -key child_schematic_docknewline -value false
+gui_set_state_value -category Layout -key child_schematic_pos_x -value {-2}
+gui_set_state_value -category Layout -key child_schematic_pos_y -value {-15}
+gui_set_state_value -category Layout -key child_schematic_size_x -value 2218
+gui_set_state_value -category Layout -key child_schematic_size_y -value 1117
+gui_set_state_value -category Layout -key child_source_docknewline -value false
+gui_set_state_value -category Layout -key child_source_pos_x -value {-2}
+gui_set_state_value -category Layout -key child_source_pos_y -value {-15}
+gui_set_state_value -category Layout -key child_source_size_x -value 2221
+gui_set_state_value -category Layout -key child_source_size_y -value 1117
+gui_set_state_value -category Layout -key child_wave_colname -value 369
+gui_set_state_value -category Layout -key child_wave_colvalue -value 369
+gui_set_state_value -category Layout -key child_wave_left -value 742
+gui_set_state_value -category Layout -key child_wave_right -value 1809
+gui_set_state_value -category Layout -key main_pos_x -value 1080
+gui_set_state_value -category Layout -key main_pos_y -value 312
+gui_set_state_value -category Layout -key main_size_x -value 3632
+gui_set_state_value -category Layout -key main_size_y -value 1681
+gui_set_state_value -category Layout -key stand_wave_child_docknewline -value false
+gui_set_state_value -category Layout -key stand_wave_child_pos_x -value {-2}
+gui_set_state_value -category Layout -key stand_wave_child_pos_y -value {-15}
+gui_set_state_value -category Layout -key stand_wave_child_size_x -value 2561
+gui_set_state_value -category Layout -key stand_wave_child_size_y -value 1293
+gui_set_state_value -category Layout -key stand_wave_top_pos_x -value 1080
+gui_set_state_value -category Layout -key stand_wave_top_pos_y -value 312
+gui_set_state_value -category Layout -key stand_wave_top_size_x -value 3636
+gui_set_state_value -category Layout -key stand_wave_top_size_y -value 1685
+gui_create_state_key -category FindDialog -key m_pMatchCase -value_type bool -value false
+gui_create_state_key -category FindDialog -key m_pMatchWord -value_type bool -value false
+gui_create_state_key -category FindDialog -key m_pUseCombo -value_type string -value {}
+gui_create_state_key -category FindDialog -key m_pWrapAround -value_type bool -value true
+gui_state_default_create -off
+
+# Begin command logging
+gui_sim_run Ucli -exe ./simv -args {-ucligui  -a simv.log} -dir .
+run
+gui_list_select_all -id Data.1
+gui_open_window Wave
+gui_list_add -id Wave.1 -from Data.1 { minimips_tb.dut.cpu_clk_50M minimips_tb.dut.cpu_rst_n minimips_tb.dut.en minimips_tb.dut.outer_inst {minimips_tb.dut.peek1[31:0]} {minimips_tb.dut.peek2[31:0]} minimips_tb.dut.rfre1 minimips_tb.dut.rfra1 minimips_tb.dut.rfre2 minimips_tb.dut.rfra2 minimips_tb.dut.rfwe minimips_tb.dut.rfwa {minimips_tb.dut.rfwd[31:0]} {minimips_tb.dut.rfrd1[31:0]} {minimips_tb.dut.rfrd2[31:0]} minimips_tb.dut.hilowe {minimips_tb.dut.hi_i[31:0]} {minimips_tb.dut.lo_i[31:0]} {minimips_tb.dut.hi_o[31:0]} {minimips_tb.dut.lo_o[31:0]} {minimips_tb.dut.imaddr[31:0]} minimips_tb.dut.imce minimips_tb.dut.inst minimips_tb.dut.dmce minimips_tb.dut.dmwe {minimips_tb.dut.dmaddr[31:0]} {minimips_tb.dut.dmdin[31:0]} {minimips_tb.dut.dmdout[31:0]} minimips_tb.dut.id_i_inst minimips_tb.dut.id_o_dm2rf minimips_tb.dut.id_o_hilowe minimips_tb.dut.id_o_rfwe minimips_tb.dut.id_o_alutype minimips_tb.dut.id_o_aluop minimips_tb.dut.id_o_rfwa {minimips_tb.dut.id_o_src1[31:0]} {minimips_tb.dut.id_o_src2[31:0]} {minimips_tb.dut.id_o_dmdin[31:0]} minimips_tb.dut.id_o_memop minimips_tb.dut.exe_i_dm2rf minimips_tb.dut.exe_i_hilowe minimips_tb.dut.exe_i_rfwe minimips_tb.dut.exe_i_alutype minimips_tb.dut.exe_i_aluop minimips_tb.dut.exe_i_rfwa {minimips_tb.dut.exe_i_src1[31:0]} {minimips_tb.dut.exe_i_src2[31:0]} {minimips_tb.dut.exe_i_dmdin[31:0]} minimips_tb.dut.exe_i_memop minimips_tb.dut.exe_o_dm2rf minimips_tb.dut.exe_o_hilowe minimips_tb.dut.exe_o_rfwe minimips_tb.dut.exe_o_rfwa {minimips_tb.dut.exe_o_mulres[63:0]} {minimips_tb.dut.exe_o_alures[31:0]} {minimips_tb.dut.exe_o_dmdin[31:0]} minimips_tb.dut.exe_o_memop minimips_tb.dut.mem_i_dm2rf minimips_tb.dut.mem_i_hilowe minimips_tb.dut.mem_i_rfwe minimips_tb.dut.mem_i_rfwa {minimips_tb.dut.mem_i_mulres[63:0]} {minimips_tb.dut.mem_i_alures[31:0]} {minimips_tb.dut.mem_i_dmdin[31:0]} minimips_tb.dut.mem_i_memop minimips_tb.dut.mem_o_dm2rf minimips_tb.dut.mem_o_hilowe minimips_tb.dut.mem_o_rfwe {minimips_tb.dut.mem_o_bytesel[3:0]} minimips_tb.dut.mem_o_rfwa {minimips_tb.dut.mem_o_mulres[63:0]} {minimips_tb.dut.mem_o_alures[31:0]} {minimips_tb.dut.mem_o_dmdout[31:0]} minimips_tb.dut.wb_i_dm2rf minimips_tb.dut.wb_i_hilowe minimips_tb.dut.wb_i_rfwe {minimips_tb.dut.wb_i_bytesel[3:0]} minimips_tb.dut.wb_i_rfwa {minimips_tb.dut.wb_i_mulres[63:0]} {minimips_tb.dut.wb_i_alures[31:0]} {minimips_tb.dut.wb_i_dmdout[31:0]} {minimips_tb.dut.$unit} } -insertionbar
+gui_sim_stop 
+gui_marker_move -id  Wave.1 C1 1278710033
+gui_wv_scroll_hslidermove -id  Wave.1 409518480
+gui_wv_scroll_hslidermove -id  Wave.1 1440451062
+gui_marker_move -id  Wave.1 C1 959764081
+gui_list_select -id Wave.1 -selected  { minimips_tb.dut.outer_inst   }
+gui_zoom -window Wave.1 -factor 2
+gui_zoom -window Wave.1 -factor 2
+gui_zoom -window Wave.1 -factor 2
+gui_list_select -id Wave.1 -selected  { {minimips_tb.dut.peek1[31:0]}   }
+gui_list_select -id Wave.1 -selected  { minimips_tb.dut.outer_inst   }
+gui_list_select -id Wave.1 -selected  { {minimips_tb.dut.lo_i[31:0]}   }
+gui_list_select -id Wave.1 -selected  { {minimips_tb.dut.hi_o[31:0]}   }
+restart
+gui_sim_restart
+gui_close_window -window TopLevel.2
+gui_list_select -id Data.1 -selected  { minimips_tb.dut.rfre2   }
+gui_list_select -id Data.1 -selected  { minimips_tb.dut.rfre1   }
+gui_list_select_all -id Data.1
+gui_open_window Wave
+gui_list_add -id Wave.1 -from Data.1 { {minimips_tb.dut.mem_i_alures[31:0]} minimips_tb.dut.id_i_inst minimips_tb.dut.dmwe {minimips_tb.dut.mem_i_dmdin[31:0]} {minimips_tb.dut.wb_i_rfwa[4:0]} minimips_tb.dut.wb_i_rfwe minimips_tb.dut.id_o_hilowe {minimips_tb.dut.id_o_alutype[3:0]} {minimips_tb.dut.wb_i_bytesel[3:0]} {minimips_tb.dut.id_o_dmdin[31:0]} {minimips_tb.dut.exe_i_dmdin[31:0]} {minimips_tb.dut.imaddr[31:0]} minimips_tb.dut.id_o_aluop {minimips_tb.dut.exe_o_dmdin[31:0]} {minimips_tb.dut.lo_i[31:0]} {minimips_tb.dut.peek1[31:0]} {minimips_tb.dut.mem_o_bytesel[3:0]} minimips_tb.dut.exe_i_aluop {minimips_tb.dut.peek2[31:0]} {minimips_tb.dut.rfwa[4:0]} {minimips_tb.dut.id_o_src1[31:0]} {minimips_tb.dut.rfwd[31:0]} {minimips_tb.dut.id_o_src2[31:0]} minimips_tb.dut.rfwe {minimips_tb.dut.lo_o[31:0]} {minimips_tb.dut.exe_o_rfwa[4:0]} minimips_tb.dut.exe_o_rfwe minimips_tb.dut.inst {minimips_tb.dut.wb_i_dmdout[31:0]} {minimips_tb.dut.wb_i_mulres[63:0]} {minimips_tb.dut.rfrd1[31:0]} minimips_tb.dut.wb_i_hilowe {minimips_tb.dut.rfrd2[31:0]} {minimips_tb.dut.mem_i_rfwa[4:0]} {minimips_tb.dut.dmaddr[31:0]} {minimips_tb.dut.mem_o_alures[31:0]} minimips_tb.dut.mem_i_rfwe {minimips_tb.dut.mem_i_mulres[63:0]} {minimips_tb.dut.id_o_rfwa[4:0]} {minimips_tb.dut.exe_o_alures[31:0]} minimips_tb.dut.id_o_rfwe minimips_tb.dut.mem_i_hilowe minimips_tb.dut.rfre1 minimips_tb.dut.exe_i_hilowe minimips_tb.dut.rfre2 minimips_tb.dut.en minimips_tb.dut.cpu_clk_50M {minimips_tb.dut.exe_i_src1[31:0]} {minimips_tb.dut.exe_i_src2[31:0]} minimips_tb.dut.imce minimips_tb.dut.outer_inst {minimips_tb.dut.mem_o_dmdout[31:0]} {minimips_tb.dut.mem_o_mulres[63:0]} {minimips_tb.dut.mem_o_rfwa[4:0]} minimips_tb.dut.mem_o_hilowe minimips_tb.dut.mem_i_memop minimips_tb.dut.mem_o_rfwe {minimips_tb.dut.exe_o_mulres[63:0]} minimips_tb.dut.exe_o_hilowe {minimips_tb.dut.exe_i_alutype[3:0]} {minimips_tb.dut.exe_i_rfwa[4:0]} minimips_tb.dut.exe_i_rfwe {minimips_tb.dut.rfra1[4:0]} minimips_tb.dut.id_o_memop {minimips_tb.dut.rfra2[4:0]} minimips_tb.dut.exe_i_memop minimips_tb.dut.dmce minimips_tb.dut.mem_i_dm2rf minimips_tb.dut.cpu_rst_n minimips_tb.dut.exe_o_memop minimips_tb.dut.mem_o_dm2rf {minimips_tb.dut.hi_i[31:0]} {minimips_tb.dut.dmdin[31:0]} {minimips_tb.dut.hi_o[31:0]} {minimips_tb.dut.wb_i_alures[31:0]} {minimips_tb.dut.dmdout[31:0]} {minimips_tb.dut.$unit} minimips_tb.dut.id_o_dm2rf minimips_tb.dut.wb_i_dm2rf minimips_tb.dut.exe_i_dm2rf minimips_tb.dut.exe_o_dm2rf minimips_tb.dut.hilowe } -insertionbar
+gui_wv_zoom_timerange -id  Wave.1 0 597
+run 1000
+gui_wv_scroll_hslidermove -id  Wave.1 2106
+gui_wv_scroll_hslidermove -id  Wave.1 0
+gui_marker_move -id  Wave.1 C1 23
+gui_list_set_filter -id Wave.1 -text {imaddr}
+gui_list_expand -id  Wave.1   {minimips_tb.dut.imaddr[31:0]}
+gui_list_collapse -id  Wave.1   {minimips_tb.dut.imaddr[31:0]}
+gui_list_expand -id  Wave.1   {minimips_tb.dut.imaddr[31:0]}
+gui_list_collapse -id  Wave.1   {minimips_tb.dut.imaddr[31:0]}
+gui_list_select_all -id Wave.1
+gui_list_set_filter -id Wave.1 -text {outer_inst}
+gui_list_select -id Wave.1 -selected  { minimips_tb.dut.outer_inst   }
+gui_list_expand -id  Wave.1   minimips_tb.dut.outer_inst
+gui_list_expand -id  Wave.1   minimips_tb.dut.outer_inst.i
+gui_list_expand -id  Wave.1   minimips_tb.dut.outer_inst.r
+gui_list_select -id Wave.1 -selected  {  }

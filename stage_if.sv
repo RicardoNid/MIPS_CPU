@@ -11,8 +11,7 @@ module stage_if (
 	);
 
 	im_addr_t addr_next;
-	assign addr_next = imaddr + 4;
-
+    
 	always_ff @ (posedge cpu_clk_50M) begin
 		if(!cpu_rst_n) begin
 			imaddr <= PC_INIT;
@@ -22,6 +21,10 @@ module stage_if (
 			imaddr <= addr_next;
 			imce   <= 1'b1;
 		end
-	end
+    end
+    
+    always_comb begin
+        addr_next = imaddr + 1;
+    end
 
 endmodule

@@ -21,13 +21,14 @@ module stage_wb (
         output word_t                lo_i
     );
 
-// passthrough
+    // passthrough, connected to storage
     assign rfwe         = wb_i_rfwe;
     assign rfwa         = wb_i_rfwa;
     assign hilowe       = wb_i_hilowe;
     assign hi_i         = wb_i_mulres[63 : 32];
     assign lo_i         = wb_i_mulres[31 : 0];
-// datapath
+    
+    // datapath
     word_t masked_dmout = {
         {{8{wb_i_bytesel[0]}} & wb_i_dmdout[7 : 0]},
         {{8{wb_i_bytesel[1]}} & wb_i_dmdout[15 : 8]},

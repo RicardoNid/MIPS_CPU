@@ -19,20 +19,17 @@ module minimips_tb;
     );
 
     initial begin
-        cpu_clk_50M    = 0;
-        cpu_rst_n      = 0; en = 0;
-        outer_inst     = inst_t'({ADDI, REG_T0, REG_T7, 16'd127});
-        #10 cpu_rst_n  = 1; en = 1;
-        outer_inst     = inst_t'({ADDI, REG_T7, REG_T0, 16'd127});
-        #10 outer_inst = inst_t'({ADDI, REG_T0, REG_T7, 16'd127});
-        #10 outer_inst = inst_t'({ADDI, REG_T7, REG_T0, 16'd127});
-        #10 outer_inst = inst_t'({ADDI, REG_T0, REG_T7, 16'd127});
-        #10 outer_inst = inst_t'({ADDI, REG_T7, REG_T0, 16'd127});
-        #10 outer_inst = inst_t'({ADDI, REG_T0, REG_T7, 16'd127});
-        #10 outer_inst = inst_t'({ADDI, REG_T7, REG_T0, 16'd127});
-        #10 outer_inst = inst_t'({ADDI, REG_T0, REG_T7, 16'd127});
-        #10 outer_inst = inst_t'({ADDI, REG_T7, REG_T0, 16'd127});
-        #10 outer_inst = inst_t'({ADDI, REG_T0, REG_T7, 16'd127});
+        cpu_clk_50M = 0;
+        cpu_rst_n   = 0; en = 0;
+        #10;
+        cpu_rst_n   = 1; en = 1;
+        forever begin
+            outer_inst = reverse(inst_t'({ADDIU, REG_T0, REG_T1, 16'd127})); #10;
+            outer_inst = reverse(inst_t'({SW, REG_ZERO, REG_T1, 16'd16})); #10;
+            outer_inst = reverse(inst_t'({ADDIU, REG_T1, REG_T2, 16'd127})); #10;
+            outer_inst = reverse(inst_t'({LW, REG_ZERO, REG_T4, 16'd16})); #10;
+            outer_inst = reverse(inst_t'({ADDIU, REG_T2, REG_T3, 16'd127})); #10;
+        end
     end
 
     always

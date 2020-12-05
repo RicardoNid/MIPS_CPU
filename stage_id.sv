@@ -30,13 +30,13 @@ module stage_id (
     assign rearranged_inst = inst_t'({id_i_inst[7 : 0],id_i_inst[15 : 8],
                 id_i_inst[23 : 16],id_i_inst[31 : 24]});
     // extract segments of inst
-    opcode_enum          opcode ;
-    func_enum            func ;
-    reg_enum             rd ;
-    reg_enum             rs ;
-    reg_enum             rt ;
-    logic       [4 : 0]  sa ;
-    logic       [15 : 0] imm ;
+    opcode_enum          opcode;
+    func_enum            func;
+    reg_enum             rd;
+    reg_enum             rs;
+    reg_enum             rt;
+    logic       [4 : 0]  sa;
+    logic       [15 : 0] imm;
 
     assign opcode          = rearranged_inst.r.op;
     assign func            = rearranged_inst.r.func;
@@ -46,7 +46,7 @@ module stage_id (
     assign sa              = rearranged_inst.r.sa;
     assign imm             = rearranged_inst.i.imm;
 
-    // todo : step0
+    // todo : step0 - add the instruction
     logic                is_inst_r;
     // not of type r, using opecode to define
     logic                is_ADDI;
@@ -137,21 +137,46 @@ module stage_id (
     assign is_MTLO         = (is_inst_r && func == MTLO);
 
     // inner switch signal
+
+    logic                src2_rt;
+    logic                src2_upper_imm;
+    logic                src2_zero_ext_imm;
+    logic                src2_sign_ext_imm;
+    logic                src2_dont_care;
+
+    logic                dst_rd;
+    logic                dst_rt;
+    logic                dst_hilo;
+    logic                dst_dont_care;
+
+    logic                dst_value_rf;
+    logic                dst_value_dm;
+    logic                dst_value_dont_care;
+
     logic                rtsel;
     logic                uppersel;
-    logic                sext;
+    logic                sextsel;
     logic                shiftsel;
     logic                immsel;
 
-    logic                is_mult;
     logic                is_add;
     logic                is_sub;
     logic                is_lt;
+
     logic                is_and;
     logic                is_or;
+    logic                is_xor;
+    logic                is_nor;
+
     logic                is_ll;
+    logic                is_rl;
+    logic                is_ra;
+
     logic                is_hi;
     logic                is_lo;
+
+    logic                is_mult;
+    logic                is_div;
 
     logic                is_load;
     logic                is_store;
@@ -166,61 +191,76 @@ module stage_id (
 
     always_comb begin
         word_t temp;
-        // todo : step1 source and destination contorl
-        // inner
-        rtsel       = is_inst_r;       // source of rfwa
-        sext        = id_o_alutype[0]; // source of src1
-        uppersel    = is_LUI;          // source of src1
-        immsel      = 1'b0;            // source of src1
-        shiftsel    = 1'b0;            // source of src2
-        rfre1       = is_inst_r;
-        rfre2       = is_inst_r;
-        // outer
-        id_o_dm2rf  = is_load;
-        id_o_hilowe = is_MULT;
-        id_o_rfwe   =                  // write back to register fixme : simplify this logic
-        is_ADD || is_SUBU || is_SLT || is_MFHI || is_MFLO ||
-        is_ADDIU || is_SLTIU || is_ORI || is_LUI || is_LB || is_LW;
-        // datapath of rfwa
-        id_o_rfwa   = rtsel ? rt : rd;
-        // datapath of src1
-        id_o_src1   = shiftsel ? sa : rfrd1;
-        // datapath of src2
-        temp        = sext ? {{16{imm[15]}},imm} : {16'h0000, imm};
-        temp        = uppersel ? (imm << 16) : temp;
-        id_o_src2   = immsel ? temp : rfrd2;
-        // datapath of dmdin
-        id_o_dmdin  = rfrd2;
+        // todo : step1 - determine source 1 [R[rs], sa]
+        shiftsel          = is_SLL; // source of src1
+        // todo : step2 - determine source 2 [R[rt], SignExtImm, ZeroExtImm, Imm << 16]
+        src2_rt           = is_ADD || is_SLT || is_SLTIU || is_SUBU || is_MULT;
+        src2_upper_imm    = is_LUI;
+        src2_sign_ext_imm = is_ADDIU || is_LB || is_LW || is_SB || is_SW;
+        src2_zero_ext_imm = is_AND || is_ORI;
+        src2_dont_care    = is_MFHI || is_MFLO;
+        unique casez (1'b1) // fixme : 3-level MUX -> 2-level MUX ?
+            src2_rt : {sextsel, uppersel, immsel}           = 3'b??0;
+            src2_upper_imm : {sextsel, uppersel, immsel}    = 3'b?11;
+            src2_sign_ext_imm : {sextsel, uppersel, immsel} = 3'b101;
+            src2_zero_ext_imm : {sextsel, uppersel, immsel} = 3'b001;
+            src2_dont_care : {sextsel, uppersel, immsel}    = 3'b???;
+        endcase
+        // todo : step3 - determine dst addr value source [R[rd], R[rt], hilo]
+        dst_rd            = is_ADD || is_SLT || is_SLTIU || is_SLL || is_SUBU || is_MFHI|| is_MFLO;
+        dst_rt            = is_ADDIU || is_AND || is_LB || is_LUI || is_LW || is_ORI;
+        dst_hilo          = is_MULT;
+        dst_dont_care     = is_SB || is_SW;
+        unique casez (1'b1)
+            dst_rd : {rtsel, id_o_rfwe, id_o_hilowe}        = 3'b010;
+            dst_rt : {rtsel, id_o_rfwe, id_o_hilowe}        = 3'b110;
+            dst_hilo : {rtsel, id_o_rfwe, id_o_hilowe}      = 3'b?01;
+            dst_dont_care : {rtsel, id_o_rfwe, id_o_hilowe} = 3'b???;
+        endcase
+        rfre1             = 1'b1;
+        rfre2             = 1'b1;
+        // datapaths
+        id_o_rfwa         = rtsel ? rt : rd;
+        id_o_src1         = shiftsel ? sa : rfrd1;
+        temp              = sextsel ? {{16{imm[15]}},imm} : {16'h0000, imm};
+        temp              = uppersel ? (imm << 16) : temp;
+        id_o_src2         = immsel ? temp : rfrd2;
     end
 
     // alu decode
     always_comb begin
-        // todo : step2 alutype
-        id_o_alutype[0]  = // arith
-        is_ADD || is_SUBU || is_SLT || is_ADDI || is_ADDIU || is_SLTIU ||
+        // todo : step4 - determine alutype
+        id_o_alutype[0] = // arith
+        is_ADD || is_SUBU || is_SLT || is_ADDIU || is_SLTIU ||
         is_LB || is_LW || is_SB || is_SW;
-        id_o_alutype[1]  = // logic
+        id_o_alutype[1] = // logic
         is_AND || is_ORI || is_LUI;
-        id_o_alutype[2]  = // move
+        id_o_alutype[2] = // move
         is_MFHI || is_MFLO;
-        id_o_alutype[3]  = // shift
+        id_o_alutype[3] = // shift
         is_SLL;
-        // aluop todo : step3 aluop
-        is_mult          = is_MULT;
-        is_add           = is_ADD || is_ADDI || is_ADDIU || is_LB || is_LW || is_SB || is_SW;
-        is_sub           = is_SUBU;
-        is_lt            = is_SLT || is_SLTIU;
-        is_and           = is_AND;
-        is_or            = is_ORI || is_LUI;
-        is_ll            = is_SLL;
-        is_hi            = is_MFHI;
-        is_lo            = is_MFLO;
-        id_o_aluop.sign  = is_SLT;
-        id_o_aluop.error = is_ADD;
+        // todo : step5 - determine aluop
+        is_add          = is_ADD || is_ADDIU || is_LB || is_LW || is_SB || is_SW;
+        is_sub          = is_SUBU;
+        is_and          = is_AND;
+        is_or           = is_ORI || is_LUI;
+        is_xor          = 1'b0;
+        is_nor          = 1'b0;
+        is_lt           = is_SLT || is_SLTIU;
+        is_ll           = is_SLL;
+        is_rl           = 1'b0;
+        is_ra           = 1'b0;
+        is_hi           = is_MFHI;
+        is_lo           = is_MFLO;
+        is_mult         = is_MULT;
+        is_div          = 1'b0;
+        // fixme : try to take advantage from don't care
+        id_o_aluop.sign = is_ADD || is_SLT || is_MULT;
         unique case (id_o_alutype)
             NOP : begin
                 unique case (1'b1)
-                    is_mult : id_o_aluop.op.mult_op = ALU_MULT;
+                    is_mult : id_o_aluop.op.mult_op  = ALU_MULT;
+                    !is_mult : id_o_aluop.op.mult_op = ALU_DIV;
                 endcase
             end
             ARITH : begin
@@ -234,6 +274,8 @@ module stage_id (
                 unique case(1'b1)
                     is_and : id_o_aluop.op.logic_op = ALU_AND;
                     is_or : id_o_aluop.op.logic_op  = ALU_OR;
+                    is_xor : id_o_aluop.op.logic_op = ALU_XOR;
+                    is_nor : id_o_aluop.op.logic_op = ALU_NOR;
                 endcase
             end
             MOVE : begin
@@ -245,19 +287,21 @@ module stage_id (
             SHIFT : begin
                 unique case(1'b1)
                     is_ll : id_o_aluop.op.shift_op = ALU_LL;
+                    is_rl : id_o_aluop.op.shift_op = ALU_RL;
+                    is_ra : id_o_aluop.op.shift_op = ALU_RA;
                 endcase
             end
         endcase
     end
 
-    // todo : step4 memop decode
+    // todo : step6 - determine memop
     always_comb begin
-        is_load  = is_LW || is_LB;
-        is_store = is_SW || is_SB;
-        is_none  = !(is_load || is_store);
-        is_byte  = is_LB || is_SB;
-        is_half  = 1'b0;
-        is_word  = !(is_byte || is_half);
+        is_load         = is_LW || is_LB;
+        is_store        = is_SW || is_SB;
+        is_none         = !(is_load || is_store);
+        is_byte         = is_LB || is_SB;
+        is_half         = 1'b0;
+        is_word         = !(is_byte || is_half);
         unique case(1'b1)
             is_load : id_o_memop.ls_type  = MEM_LOAD;
             is_store : id_o_memop.ls_type = MEM_STORE;
@@ -269,6 +313,8 @@ module stage_id (
             is_byte : id_o_memop.ls_width = MEM_BYTE;
         endcase
         id_o_memop.sign = 1'b0;
+        id_o_dm2rf      = is_load;
+        id_o_dmdin      = rfrd2;
     end
 
 endmodule

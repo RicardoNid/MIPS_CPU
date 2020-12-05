@@ -43,43 +43,41 @@ module stage_exe (
     word_t        moveres;
     word_t        shiftres;
 
+    // fixme : overflow should be considered, in Chap7
     always_comb begin
 
-        mulres  = exe_i_aluop.op.mult_op == ALU_MULT ? exe_i_src1 * exe_i_src2 : {ZERO,ZERO};
+        mulres       = exe_i_aluop.op.mult_op == ALU_MULT ? exe_i_src1 * exe_i_src2 : {ZERO,ZERO};
 
-        unique case (exe_i_aluop.op.shift_op) // shift mode
-            ALU_LL : shiftres = exe_i_src1 << exe_i_src2;
-            ALU_RL : shiftres = exe_i_src1 >> exe_i_src2;
-            ALU_RA : shiftres = exe_i_src1 >>> exe_i_src2;
+        unique case (exe_i_aluop.op.shift_op) // shift
+            ALU_LL : shiftres = exe_i_src2 << exe_i_src1;
+            ALU_RL : shiftres = exe_i_src2 >> exe_i_src1;
+            ALU_RA : shiftres = exe_i_src2 >>> exe_i_src1;
         endcase
 
-        unique case (exe_i_aluop.op.arith_op)
+        unique case (exe_i_aluop.op.arith_op) // arith
             ALU_ADD : arithres = exe_i_src1 + exe_i_src2;
             ALU_SUB : arithres = exe_i_src1 - exe_i_src2;
-            ALU_GT : arithres  = exe_i_src1 > exe_i_src2;
-            ALU_GE : arithres  = exe_i_src1 >= exe_i_src2;
-            ALU_LT : arithres  = exe_i_src1 < exe_i_src2;
-            ALU_LE : arithres  = exe_i_src1 <= exe_i_src2;
-            ALU_EQ : arithres  = exe_i_src1 == exe_i_src2;
+            ALU_LT : arithres  = {{(WIDTH_REG - 1){1'b0}}, exe_i_src1 < exe_i_src2};
         endcase
 
-        unique case (exe_i_aluop.op.logic_op)
+        unique case (exe_i_aluop.op.logic_op) // logic
             ALU_AND : logicres = exe_i_src1 & exe_i_src2;
-            OR : logicres      = exe_i_src1 | exe_i_src2;
+            ALU_OR : logicres  = exe_i_src1 | exe_i_src2;
             ALU_XOR : logicres = exe_i_src1 ^ exe_i_src2;
+            ALU_NOR : logicres = ~(exe_i_src1 | exe_i_src2);
         endcase
 
-        moveres = exe_i_aluop.op.move_op == ALU_HI ? hi_o : lo_o;
-    end
+        moveres      = exe_i_aluop.op.move_op == ALU_HI ? hi_o : lo_o; // move
 
-    // outer data path
-    // determine result by using one-hot as mask
-    assign exe_o_alures =
+        // fixme : division should be implemented, in Chap6
+        // outer data path
+        exe_o_mulres = mulres;
+        // determine result by using one-hot as mask
+        exe_o_alures =
         {WIDTH_REG{exe_i_alutype[0]}} & arithres |
         {WIDTH_REG{exe_i_alutype[1]}} & logicres |
         {WIDTH_REG{exe_i_alutype[2]}} & moveres |
         {WIDTH_REG{exe_i_alutype[3]}} & shiftres;
-
-    assign exe_o_mulres = mulres;
+    end
 
 endmodule

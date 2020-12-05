@@ -1,4 +1,4 @@
-//
+// handle mem load/store according to memop
 
 import mips_cpu_pkg::*;
 

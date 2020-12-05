@@ -1,0 +1,17 @@
+defines.sv  
+dm.sv          
+im.sv         
+minimips_tb.sv  
+regs_idexe.sv  
+stage_exe.sv  
+stage_mem.sv
+decode.sv   
+regfile.sv      
+regs_ifid.sv   
+stage_id.sv   
+stage_wb.sv
+hilo.sv        
+minimips.sv   
+regs_exemem.sv  
+regs_memwb.sv  
+stage_if.sv   

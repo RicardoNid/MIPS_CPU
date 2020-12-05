@@ -1,0 +1,105 @@
+ucliGUI::start /mnt/c/MIPS_CPU/simv -ucligui -l simv.log
+set ucliGUI::state
+set ucliGUI::state
+ucliCore::getToolPID
+synopsys::env hasTB
+trigger_hier_stack_context_switch 0
+synUtils::setDVEInitPhase 1
+synopsys::dump -type VPD -file /mnt/c/MIPS_CPU/inter.vpd -locking
+synopsys::dump -autoflush on -fid VPD1
+set ::dve_fid VPD1
+synUtils::setDVEInitPhase 0
+ucliCore::getToolPID
+synUtils::sendTool -active _icl_setToolSocket /tmp/smlnpEYkPxv
+synUtils::sendTool -active {_icl_start_rpc -version "L-2016.06_Full64" -sync_file /tmp/vcs_dve_rpc.root.14259}
+synUtils::sendTool -active {_icl_createSharedMemory /tmp/vcs_dve_general.root.14259}
+config endofsim noexit
+config onfail enable all
+config syscaddplainmembers
+config syscaddsourcenames
+config syscaddstructtypes
+synopsys::listing -disable
+# Begin_DVE_Session_Save_Info
+# DVE restart session
+# Saved on Sat Dec 5 14:17:35 2020
+# Designs open: 1
+#   Sim: /mnt/c/MIPS_CPU/simv
+# Toplevel windows open: 2
+# 	TopLevel.1
+# 	TopLevel.2
+#   Source.1: minimips_tb.dut.u_stage_if
+#   Wave.1: 82 signals
+#   Group count = 1
+#   Group Group1 signal count = 82
+# End_DVE_Session_Save_Info
+# DVE version: L-2016.06_Full64
+# DVE build date: May 24 2016 21:01:02
+#<Session mode="Restart" path=".restartSimSession.tcl" type="Debug">
+# Application preferences
+#<WindowLayout>
+# DVE top-level session
+# Create and position top-level window: TopLevel.1
+set TopLevel.1 TopLevel.1
+# Docked window settings
+set HSPane.1 HSPane.1
+set Hier.1 Hier.1
+set DLPane.1 DLPane.1
+set Data.1 Data.1
+set Console.1 Console.1
+# MDI window settings
+set Source.1 Source.1
+# End MDI window settings
+# Create and position top-level window: TopLevel.2
+set TopLevel.2 TopLevel.2
+# Docked window settings
+# MDI window settings
+set Wave.1 Wave.1
+# End MDI window settings
+#</WindowLayout>
+#<Database>
+#</Database>
+# DVE Global setting session:
+# Global: Breakpoints
+# Global: Bus
+# Global: Expressions
+# Global: Signal Time Shift
+# Global: Signal Compare
+# Global: Signal Groups
+synopsys::dump -add {minimips_tb.dut} -scope "." -depth 1 -fid VPD1
+set _session_group_1 Group1
+set Group1 "$_session_group_1"
+# Global: Highlighting
+# Global: Stack
+synopsys::xml {set_only_active_frame <data value="1" />}
+# Post database loading setting...
+# Save global setting...
+# Wave/List view global setting
+# Close all empty TopLevel windows
+foreach __top [gui_ekki_get_window_ids -type TopLevel] {     if { [llength [gui_ekki_get_window_ids -parent $__top]] == 0} {         gui_close_window -window $__top     } }
+# DVE View/pane content session:
+# Hier 'Hier.1'
+catch {gui_list_expand -id ${Hier.1} minimips_tb}
+catch {gui_list_select -id ${Hier.1} {minimips_tb.dut}}
+# Data 'Data.1'
+catch { gui_list_select -id ${Data.1} {minimips_tb.dut.cpu_clk_50M minimips_tb.dut.cpu_rst_n minimips_tb.dut.en minimips_tb.dut.outer_inst minimips_tb.dut.peek1 minimips_tb.dut.peek2 minimips_tb.dut.rfre1 minimips_tb.dut.rfra1 minimips_tb.dut.rfre2 minimips_tb.dut.rfra2 minimips_tb.dut.rfwe minimips_tb.dut.rfwa minimips_tb.dut.rfwd minimips_tb.dut.rfrd1 minimips_tb.dut.rfrd2 minimips_tb.dut.hilowe minimips_tb.dut.hi_i minimips_tb.dut.lo_i minimips_tb.dut.hi_o minimips_tb.dut.lo_o minimips_tb.dut.imaddr minimips_tb.dut.imce minimips_tb.dut.inst minimips_tb.dut.dmce minimips_tb.dut.dmwe minimips_tb.dut.dmaddr minimips_tb.dut.dmdin minimips_tb.dut.dmdout minimips_tb.dut.id_i_inst minimips_tb.dut.id_o_dm2rf minimips_tb.dut.id_o_hilowe minimips_tb.dut.id_o_rfwe minimips_tb.dut.id_o_alutype minimips_tb.dut.id_o_aluop minimips_tb.dut.id_o_rfwa minimips_tb.dut.id_o_src1 minimips_tb.dut.id_o_src2 minimips_tb.dut.id_o_dmdin minimips_tb.dut.id_o_memop minimips_tb.dut.exe_i_dm2rf minimips_tb.dut.exe_i_hilowe minimips_tb.dut.exe_i_rfwe minimips_tb.dut.exe_i_alutype minimips_tb.dut.exe_i_aluop minimips_tb.dut.exe_i_rfwa minimips_tb.dut.exe_i_src1 minimips_tb.dut.exe_i_src2 minimips_tb.dut.exe_i_dmdin minimips_tb.dut.exe_i_memop minimips_tb.dut.exe_o_dm2rf minimips_tb.dut.exe_o_hilowe minimips_tb.dut.exe_o_rfwe minimips_tb.dut.exe_o_rfwa minimips_tb.dut.exe_o_mulres minimips_tb.dut.exe_o_alures minimips_tb.dut.exe_o_dmdin minimips_tb.dut.exe_o_memop minimips_tb.dut.mem_i_dm2rf minimips_tb.dut.mem_i_hilowe minimips_tb.dut.mem_i_rfwe minimips_tb.dut.mem_i_rfwa minimips_tb.dut.mem_i_mulres minimips_tb.dut.mem_i_alures minimips_tb.dut.mem_i_dmdin minimips_tb.dut.mem_i_memop minimips_tb.dut.mem_o_dm2rf minimips_tb.dut.mem_o_hilowe minimips_tb.dut.mem_o_rfwe minimips_tb.dut.mem_o_bytesel minimips_tb.dut.mem_o_rfwa minimips_tb.dut.mem_o_mulres minimips_tb.dut.mem_o_alures minimips_tb.dut.mem_o_dmdout minimips_tb.dut.wb_i_dm2rf minimips_tb.dut.wb_i_hilowe minimips_tb.dut.wb_i_rfwe minimips_tb.dut.wb_i_bytesel minimips_tb.dut.wb_i_rfwa minimips_tb.dut.wb_i_mulres minimips_tb.dut.wb_i_alures minimips_tb.dut.wb_i_dmdout {minimips_tb.dut.$unit} }}
+# Source 'Source.1'
+# View 'Wave.1'
+set groupExD [gui_get_pref_value -category Wave -key exclusiveSG]
+set origWaveHeight [gui_get_pref_value -category Wave -key waveRowHeight]
+set origGroupCreationState [gui_list_create_group_when_add -wave]
+synopsys::dump -add {_vcs_unit__2204379303 } -aggregates  -fid VPD1
+ucliGUI::vpdAddHierarchy -scope _vcs_unit__2204379303 -depth 3 -file /mnt/c/MIPS_CPU/inter.vpd; synopsys::dump -flush VPD1
+ucliGUI::vpdAddHierarchy -scope _vcs_unit__2204379303 -depth 2 -file /mnt/c/MIPS_CPU/inter.vpd; synopsys::dump -flush VPD1
+if {$origGroupCreationState} { 	gui_list_create_group_when_add -wave -enable }
+if { $groupExD } {  gui_msg_report -code DVWW028 }
+# Restore toplevel window zorder
+# The toplevel window could be closed if it has no view/pane
+if {[gui_exist_window -window ${TopLevel.2}]} { 	gui_set_active_window -window ${TopLevel.2} 	gui_set_active_window -window ${Wave.1} }
+if {[gui_exist_window -window ${TopLevel.1}]} { 	gui_set_active_window -window ${TopLevel.1} 	gui_set_active_window -window ${Source.1} 	gui_set_active_window -window ${Console.1} }
+#</Session>
+run 1000
+set ucliGUI::state
+set ucliGUI::state
+set ucliGUI::state
+set ucliGUI::state
+set ucliGUI::state
