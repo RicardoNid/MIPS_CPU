@@ -67,7 +67,6 @@ module stage_mem (
                 dmwe = 1'b0;
             end
         endcase
-
     end
 
 endmodule

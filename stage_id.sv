@@ -86,6 +86,7 @@ module stage_id (
     assign is_SW           = opcode == SW;
 
     // of type r, using func to define
+    logic                is_EMPTY;
     logic                is_ADD;
     logic                is_ADDU;
     logic                is_SUB;
@@ -111,6 +112,7 @@ module stage_id (
     logic                is_MTHI;
     logic                is_MTLO;
 
+    assign is_EMPTY        = (rearranged_inst == 32'h0 );
     assign is_ADD          = (is_inst_r && func == ADD );
     assign is_ADDU         = (is_inst_r && func == ADDU);
     assign is_SUB          = (is_inst_r && func == SUB );
@@ -177,6 +179,7 @@ module stage_id (
 
     logic                is_mult;
     logic                is_div;
+    logic                is_empty;
 
     logic                is_load;
     logic                is_store;
@@ -194,29 +197,51 @@ module stage_id (
         // todo : step1 - determine source 1 [R[rs], sa]
         shiftsel          = is_SLL; // source of src1
         // todo : step2 - determine source 2 [R[rt], SignExtImm, ZeroExtImm, Imm << 16]
-        src2_rt           = is_ADD || is_SLT || is_SLTIU || is_SUBU || is_MULT;
+        src2_rt           = is_ADD || is_SLT || is_SUBU || is_AND || is_MULT || is_SLL;
         src2_upper_imm    = is_LUI;
-        src2_sign_ext_imm = is_ADDIU || is_LB || is_LW || is_SB || is_SW;
-        src2_zero_ext_imm = is_AND || is_ORI;
-        src2_dont_care    = is_MFHI || is_MFLO;
+        src2_sign_ext_imm = is_ADDIU || is_ADDI|| is_SLTIU || is_LB || is_LW || is_SB || is_SW;
+        src2_zero_ext_imm = is_ORI;
+        src2_dont_care    = is_EMPTY || is_MFHI || is_MFLO;
+        // for behavioral sim
+        `ifndef SYNTHESIS
         unique casez (1'b1) // fixme : 3-level MUX -> 2-level MUX ?
-            src2_rt : {sextsel, uppersel, immsel}           = 3'b??0;
-            src2_upper_imm : {sextsel, uppersel, immsel}    = 3'b?11;
+            src2_rt : {sextsel, uppersel, immsel}           = 3'b000;
+            src2_upper_imm : {sextsel, uppersel, immsel}    = 3'b011;
             src2_sign_ext_imm : {sextsel, uppersel, immsel} = 3'b101;
             src2_zero_ext_imm : {sextsel, uppersel, immsel} = 3'b001;
-            src2_dont_care : {sextsel, uppersel, immsel}    = 3'b???;
+            src2_dont_care : {sextsel, uppersel, immsel}    = 3'b000;
         endcase
+        `endif
+        `ifdef SYNTHESIS
+        unique casez (1'b1) // fixme : 3-level MUX -> 2-level MUX ?
+            src2_rt : {sextsel, uppersel, immsel}           = 3'bXX0;
+            src2_upper_imm : {sextsel, uppersel, immsel}    = 3'bX11;
+            src2_sign_ext_imm : {sextsel, uppersel, immsel} = 3'b101;
+            src2_zero_ext_imm : {sextsel, uppersel, immsel} = 3'b001;
+            src2_dont_care : {sextsel, uppersel, immsel}    = 3'bXXX;
+        endcase
+        `endif
         // todo : step3 - determine dst addr value source [R[rd], R[rt], hilo]
-        dst_rd            = is_ADD || is_SLT || is_SLTIU || is_SLL || is_SUBU || is_MFHI|| is_MFLO;
-        dst_rt            = is_ADDIU || is_AND || is_LB || is_LUI || is_LW || is_ORI;
+        dst_rd            = is_ADD || is_ADDI || is_SLT ||is_AND || is_SLL || is_SUBU || is_MFHI|| is_MFLO;
+        dst_rt            = is_ADDIU|| is_SLTIU || is_LB || is_LUI || is_LW || is_ORI;
         dst_hilo          = is_MULT;
-        dst_dont_care     = is_SB || is_SW;
+        dst_dont_care     = is_EMPTY || is_SB || is_SW;
+        `ifndef SYNTHESIS
         unique casez (1'b1)
             dst_rd : {rtsel, id_o_rfwe, id_o_hilowe}        = 3'b010;
             dst_rt : {rtsel, id_o_rfwe, id_o_hilowe}        = 3'b110;
-            dst_hilo : {rtsel, id_o_rfwe, id_o_hilowe}      = 3'b?01;
-            dst_dont_care : {rtsel, id_o_rfwe, id_o_hilowe} = 3'b???;
+            dst_hilo : {rtsel, id_o_rfwe, id_o_hilowe}      = 3'b001;
+            dst_dont_care : {rtsel, id_o_rfwe, id_o_hilowe} = 3'b000;
         endcase
+        `endif
+        `ifdef SYNTHESIS
+        unique casez (1'b1)
+            dst_rd : {rtsel, id_o_rfwe, id_o_hilowe}        = 3'b010;
+            dst_rt : {rtsel, id_o_rfwe, id_o_hilowe}        = 3'b110;
+            dst_hilo : {rtsel, id_o_rfwe, id_o_hilowe}      = 3'bX01;
+            dst_dont_care : {rtsel, id_o_rfwe, id_o_hilowe} = 3'bXXX;
+        endcase
+        `endif
         rfre1             = 1'b1;
         rfre2             = 1'b1;
         // datapaths
@@ -231,7 +256,7 @@ module stage_id (
     always_comb begin
         // todo : step4 - determine alutype
         id_o_alutype[0] = // arith
-        is_ADD || is_SUBU || is_SLT || is_ADDIU || is_SLTIU ||
+        is_ADD || is_ADDI || is_SUBU || is_SLT || is_ADDIU || is_SLTIU ||
         is_LB || is_LW || is_SB || is_SW;
         id_o_alutype[1] = // logic
         is_AND || is_ORI || is_LUI;
@@ -240,7 +265,7 @@ module stage_id (
         id_o_alutype[3] = // shift
         is_SLL;
         // todo : step5 - determine aluop
-        is_add          = is_ADD || is_ADDIU || is_LB || is_LW || is_SB || is_SW;
+        is_add          = is_ADD || is_ADDI || is_ADDIU || is_LB || is_LW || is_SB || is_SW;
         is_sub          = is_SUBU;
         is_and          = is_AND;
         is_or           = is_ORI || is_LUI;
@@ -254,13 +279,15 @@ module stage_id (
         is_lo           = is_MFLO;
         is_mult         = is_MULT;
         is_div          = 1'b0;
+        is_empty        = is_EMPTY;
         // fixme : try to take advantage from don't care
         id_o_aluop.sign = is_ADD || is_SLT || is_MULT;
         unique case (id_o_alutype)
             NOP : begin
                 unique case (1'b1)
                     is_mult : id_o_aluop.op.mult_op  = ALU_MULT;
-                    !is_mult : id_o_aluop.op.mult_op = ALU_DIV;
+                    is_div : id_o_aluop.op.mult_op   = ALU_DIV;
+                    is_empty : id_o_aluop.op.mult_op = ALU_MULT;
                 endcase
             end
             ARITH : begin

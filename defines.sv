@@ -146,7 +146,7 @@ package mips_cpu_pkg;
         inst_r_t r;
         inst_j_t j;
     } inst_t;
-
+    
     function automatic inst_t reverse(inst_t origianl);
         return inst_t'({origianl[7 : 0], origianl[15 : 8], origianl[23 : 16], origianl[31 : 24]});
     endfunction

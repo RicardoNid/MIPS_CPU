@@ -35,7 +35,7 @@ module minimips (
         // Outputs
         .rfrd1 (rfrd1),
         .rfrd2 (rfrd2)
-     );
+    );
 
     logic                 hilowe;
     word_t                hi_i;
