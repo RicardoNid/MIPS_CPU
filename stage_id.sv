@@ -326,8 +326,8 @@ module stage_id (
         is_load         = is_LW || is_LB;
         is_store        = is_SW || is_SB;
         is_none         = !(is_load || is_store);
-        is_byte         = is_LB || is_SB;
-        is_half         = 1'b0;
+        is_byte         = is_LB || is_LBU || is_SB;
+        is_half         = is_LH || is_LHU;
         is_word         = !(is_byte || is_half);
         unique case(1'b1)
             is_load : id_o_memop.ls_type  = MEM_LOAD;
@@ -339,7 +339,7 @@ module stage_id (
             is_half : id_o_memop.ls_width = MEM_HALF;
             is_byte : id_o_memop.ls_width = MEM_BYTE;
         endcase
-        id_o_memop.sign = 1'b0;
+        id_o_memop.sign = 1'b1;
         id_o_dm2rf      = is_load;
         id_o_dmdin      = rfrd2;
     end
