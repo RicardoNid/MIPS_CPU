@@ -195,6 +195,7 @@ module minimips (
     logic                 mem_o_hilowe;
     logic                 mem_o_rfwe;
     logic         [3 : 0] mem_o_bytesel;
+    logic                 mem_o_loadsign;
     reg_enum              mem_o_rfwa;
     double_word_t         mem_o_mulres;
     word_t                mem_o_alures;
@@ -204,17 +205,18 @@ module minimips (
     logic                 wb_i_hilowe;
     logic                 wb_i_rfwe;
     logic         [3 : 0] wb_i_bytesel;
+    logic                 wb_i_loadsign;
     reg_enum              wb_i_rfwa;
     double_word_t         wb_i_mulres;
     word_t                wb_i_alures;
     word_t                wb_i_dmdout;
 
     regs_memwb u_regs_memwb (
-        // Inputs
         .cpu_clk_50M (cpu_clk_50M),
         .cpu_rst_n (cpu_rst_n),
         .mem_o_alures (mem_o_alures),
         .mem_o_bytesel(mem_o_bytesel),
+        .mem_o_loadsign(mem_o_loadsign),
         // signal from mem stage
         .mem_o_dm2rf (mem_o_dm2rf),
         .mem_o_dmdout (mem_o_dmdout),
@@ -222,10 +224,10 @@ module minimips (
         .mem_o_mulres (mem_o_mulres),
         .mem_o_rfwa (mem_o_rfwa),
         .mem_o_rfwe (mem_o_rfwe),
-        // Outputs
+        // signal to wb stage
         .wb_i_alures (wb_i_alures),
         .wb_i_bytesel (wb_i_bytesel),
-        // signal to wb stage
+        .wb_i_loadsign(wb_i_loadsign),
         .wb_i_dm2rf (wb_i_dm2rf),
         .wb_i_dmdout (wb_i_dmdout),
         .wb_i_hilowe (wb_i_hilowe),
@@ -323,13 +325,15 @@ module minimips (
         .mem_o_hilowe (mem_o_hilowe),
         .mem_o_mulres (mem_o_mulres),
         .mem_o_rfwa (mem_o_rfwa),
-        .mem_o_rfwe (mem_o_rfwe)
+        .mem_o_rfwe (mem_o_rfwe),
+        .mem_o_loadsign(mem_o_loadsign)
     );
 
     stage_wb u_stage_wb (
         // Inputs
         .wb_i_alures (wb_i_alures),
         .wb_i_bytesel(wb_i_bytesel),
+        .wb_i_loadsign(wb_i_loadsign), 
         // interface with regs_memwb
         .wb_i_dm2rf (wb_i_dm2rf),
         .wb_i_dmdout (wb_i_dmdout),
@@ -344,8 +348,8 @@ module minimips (
         .rfwa (rfwa),
         .rfwd (rfwd),
         // interface with regfile and hilo
-        .rfwe (rfwe)
-    );
+        .rfwe (rfwe) 
+     );
 
     assign peek1 = rfrd1;
     assign peek2 = rfrd2;

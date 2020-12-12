@@ -29,7 +29,4 @@ module minimips_tb;
     always
         #5 cpu_clk_50M = ! cpu_clk_50M;
 
-//    always
-//        #10 $display(minimips.rfwe, minimips.rfwa, minimips.rfwd);
-
 endmodule

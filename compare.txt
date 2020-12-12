@@ -1,0 +1,54 @@
+reverse(inst_t'({ ORI, REG_ZERO, REG_AT, 16'h64})) ;              || 1 00001 00000064 ||
+reverse(inst_t'({ LUI, 5'h0, REG_V0, 16'h6500})) ;                || 1 00002 65000000 ||
+reverse(inst_t'({ 32'h0 })) ;                                     || 0 00000 00000000 ||
+reverse(inst_t'({ 32'h0 })) ;                                     || 0 00000 00000000 ||
+reverse(inst_t'({ ADDIU, REG_AT, REG_V1, 16'h4})) ;               || 1 00003 00000068 ||
+reverse(inst_t'({ SLTIU, REG_AT, REG_A0, 16'h68})) ;              || 1 00004 00000001 ||
+reverse(inst_t'({ 6'h0, REG_AT, REG_V0, REG_A1, 5'h0, ADD})) ;    || 1 00005 65000064 || 
+reverse(inst_t'({ 6'h0, REG_V0, REG_AT, REG_A2, 5'h0, SUBU})) ;   || 1 00006 64FFFF9C || 
+reverse(inst_t'({ 6'h0, REG_AT, REG_V0, REG_A3, 5'h0, SLT})) ;    || 1 00007 00000001 || 
+reverse(inst_t'({ 6'h0, REG_AT, REG_V0, REG_T0, 5'h0, AND})) ;    || 1 00008 00000000 ||
+reverse(inst_t'({ ORI, REG_AT, REG_T1, 16'h65})) ;                || 1 00009 00000065 ||
+reverse(inst_t'({ 6'h0, REG_ZERO, REG_AT, REG_T2, 5'h4, SLL})) ;  || 1 0000A 00000640 ||
+reverse(inst_t'({ 6'h0, REG_AT, REG_V0, REG_ZERO, 5'h0, MULT})) ; || 0 00000 00000000 ||
+reverse(inst_t'({ 32'h0 })) ;                                     || 0 00000 00000000 || 
+reverse(inst_t'({ 32'h0 })) ;                                     || 0 00000 00000000 ||
+reverse(inst_t'({ 16'h0, REG_T3,5'h0,MFHI})) ;                    || 1 0000B 00000027 || 之前的MULT正确
+reverse(inst_t'({ 16'h0, REG_T4,5'h0,MFLO})) ;                    || 1 0000C 74000000 || 
+reverse(inst_t'({ 32'h0 })) ;                                     || 0 00000 00000000 || 
+reverse(inst_t'({ORI,REG_ZERO, REG_AT, 16'hff})) ;                || 1 00001 000000ff || 
+reverse(inst_t'({32'd0})) ;                                       || 0 00000 00000000 ||
+reverse(inst_t'({32'd0})) ;                                       || 0 00000 00000000 ||
+reverse(inst_t'({32'd0})) ;                                       || 0 00000 00000000 ||
+reverse(inst_t'({SB, REG_ZERO, REG_AT, 16'h03})) ;                || 0 00000 00000000 || 
+reverse(inst_t'({ORI, REG_ZERO, REG_AT, 16'hee})) ;               || 1 00001 000000ee ||
+reverse(inst_t'({32'd0})) ;                                       || 0 00000 00000000 || 
+reverse(inst_t'({32'd0})) ;                                       || 0 00000 00000000 ||
+reverse(inst_t'({32'd0})) ;                                       || 0 00000 00000000 ||
+reverse(inst_t'({SB, REG_ZERO, REG_AT, 16'h02})) ;                || 0 00000 00000000 || 
+reverse(inst_t'({ORI, REG_ZERO, REG_AT, 16'hdd})) ;               || 1 00001 000000dd ||
+reverse(inst_t'({32'd0})) ;                                       || 0 00000 00000000 || 
+reverse(inst_t'({32'd0})) ;                                       || 0 00000 00000000 || 
+reverse(inst_t'({32'd0})) ;                                       || 0 00000 00000000 || 
+reverse(inst_t'({SB, REG_ZERO, REG_AT, 16'h01})) ;                || 0 00000 00000000 || 
+reverse(inst_t'({ORI, REG_ZERO, REG_AT, 16'hcc})) ;               || 1 00001 000000cc || 
+reverse(inst_t'({32'd0})) ;                                       || 0 00000 00000000 || 
+reverse(inst_t'({32'd0})) ;                                       || 0 00000 00000000 || 
+reverse(inst_t'({32'd0})) ;                                       || 0 00000 00000000 || 
+reverse(inst_t'({SB, REG_ZERO, REG_AT, 16'h00})) ;                || 0 00000 00000000 || 
+reverse(inst_t'({LB, REG_ZERO, REG_V0, 16'h03})) ;                || 1 00002 ffffffff ||
+reverse(inst_t'({32'd0})) ;                                       || 0 00000 00000000 ||
+reverse(inst_t'({LUI, REG_ZERO, REG_AT, 16'h4455})) ;             || 1 00001 44550000 ||
+reverse(inst_t'({32'd0})) ;                                       || 0 00000 00000000 || 
+reverse(inst_t'({32'd0})) ;                                       || 0 00000 00000000 ||  
+reverse(inst_t'({32'd0})) ;                                       || 0 00000 00000000 || 
+reverse(inst_t'({ORI, REG_AT, REG_AT, 16'h6677})) ;               || 1 00001 44556677 ||
+reverse(inst_t'({32'd0})) ;                                       || 0 00000 00000000 || 
+reverse(inst_t'({32'd0})) ;                                       || 0 00000 00000000 || 
+reverse(inst_t'({32'd0})) ;                                       || 0 00000 00000000 || 
+reverse(inst_t'({SW, REG_ZERO, REG_AT, 16'h08})) ;                || 0 00000 00000000 || 
+reverse(inst_t'({32'd0})) ;                                       || 0 00000 00000000 || 0 x x
+reverse(inst_t'({32'd0})) ;                                       || 0 00000 00000000 || 
+reverse(inst_t'({32'd0})) ;                                       || 0 00000 00000000 || 
+reverse(inst_t'({LW, REG_ZERO, REG_V0, 16'h08})) ;                || 1 00002 44556677 ||
+reverse(inst_t'({32'd0})) ;                                       || 0 00000 00000000 ||               

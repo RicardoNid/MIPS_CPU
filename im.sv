@@ -68,7 +68,7 @@ module im (
         mem[47]= reverse(inst_t'({32'd0})) ;
         mem[48]= reverse(inst_t'({32'd0})) ;
         mem[49]= reverse(inst_t'({SW, REG_ZERO, REG_AT, 16'h08})) ;
-        mem[40]= reverse(inst_t'({32'd0})) ;
+        mem[50]= reverse(inst_t'({32'd0})) ;
         mem[51]= reverse(inst_t'({32'd0})) ;
         mem[52]= reverse(inst_t'({32'd0})) ;
         mem[53]= reverse(inst_t'({LW, REG_ZERO, REG_V0, 16'h08})) ;

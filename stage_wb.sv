@@ -8,6 +8,7 @@ module stage_wb (
         input  logic                 wb_i_hilowe,
         input  logic                 wb_i_rfwe,
         input  logic         [3 : 0] wb_i_bytesel,
+        input  logic                 wb_i_loadsign,
         input  reg_enum              wb_i_rfwa,
         input  double_word_t         wb_i_mulres,
         input  word_t                wb_i_alures,
@@ -22,20 +23,27 @@ module stage_wb (
     );
 
     // passthrough, connected to storage
-    assign rfwe         = wb_i_rfwe;
-    assign rfwa         = wb_i_rfwa;
-    assign hilowe       = wb_i_hilowe;
-    assign hi_i         = wb_i_mulres[63 : 32];
-    assign lo_i         = wb_i_mulres[31 : 0];
+    assign rfwe   = wb_i_rfwe;
+    assign rfwa   = wb_i_rfwa;
+    assign hilowe = wb_i_hilowe;
+    assign hi_i   = wb_i_mulres[63 : 32];
+    assign lo_i   = wb_i_mulres[31 : 0];
 
     // datapath
-    word_t masked_dmout;
-    assign masked_dmout = {
-            {{8{wb_i_bytesel[3]}} & wb_i_dmdout[31 : 24]},
-            {{8{wb_i_bytesel[2]}} & wb_i_dmdout[23 : 16]},
-            {{8{wb_i_bytesel[1]}} & wb_i_dmdout[15 : 8]},
-            {{8{wb_i_bytesel[0]}} & wb_i_dmdout[7 : 0]}
-        };
-    assign rfwd         = wb_i_dm2rf ? masked_dmout : wb_i_alures;
+    // fixme : improve logic
+    word_t ext_masked_dmdout;
+    always_comb begin
+        if(wb_i_loadsign && wb_i_bytesel[1] == 0) begin
+            ext_masked_dmdout[7 : 0]   = wb_i_dmdout[7 : 0];
+            ext_masked_dmdout[31 : 8]  ={24{wb_i_dmdout[7]}};
+        end else if(wb_i_loadsign && wb_i_bytesel[2] == 0)begin
+            ext_masked_dmdout[15 : 0]  = wb_i_dmdout[15 : 0];
+            ext_masked_dmdout[31 : 16] ={16{wb_i_dmdout[15]}};
+        end else begin
+            ext_masked_dmdout          = wb_i_dmdout;
+        end
+    end
+
+    assign rfwd   = wb_i_dm2rf ? ext_masked_dmdout : wb_i_alures;
 
 endmodule

@@ -23,6 +23,7 @@ module stage_mem (
         output logic                 mem_o_hilowe,
         output logic                 mem_o_rfwe,
         output logic         [3 : 0] mem_o_bytesel,
+        output logic                 mem_o_loadsign,
         output reg_enum              mem_o_rfwa,
         output double_word_t         mem_o_mulres,
         output word_t                mem_o_alures,
@@ -30,15 +31,16 @@ module stage_mem (
     );
 
     // passthrough
-    assign mem_o_dm2rf  = mem_i_dm2rf;
-    assign mem_o_hilowe = mem_i_hilowe;
-    assign mem_o_rfwe   = mem_i_rfwe;
-    assign mem_o_rfwa   = mem_i_rfwa;
-    assign mem_o_mulres = mem_i_mulres;
-    assign mem_o_alures = mem_i_alures;
-    assign dmdin        = mem_i_dmdin;
-    assign mem_o_dmdout = dmdout;
-    assign dmaddr       = mem_i_alures;
+    assign mem_o_dm2rf    = mem_i_dm2rf;
+    assign mem_o_hilowe   = mem_i_hilowe;
+    assign mem_o_rfwe     = mem_i_rfwe;
+    assign mem_o_rfwa     = mem_i_rfwa;
+    assign mem_o_mulres   = mem_i_mulres;
+    assign mem_o_alures   = mem_i_alures;
+    assign dmdin          = mem_i_dmdin;
+    assign mem_o_dmdout   = dmdout;
+    assign dmaddr         = mem_i_alures;
+    assign mem_o_loadsign = mem_i_memop.sign;
 
     // MCU
     always_comb begin
