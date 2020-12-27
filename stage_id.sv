@@ -22,7 +22,12 @@ module stage_id (
         output word_t       id_o_src1,
         output word_t       id_o_src2,
         output word_t       id_o_dmdin,
-        output memop_struct id_o_memop
+        output memop_struct id_o_memop,
+        // interface for data forwarding
+        input reg_enum exe_o_rfwa,
+        in
+        input word_t exe_o_alures,
+        input word_t mem_o_alures,
     );
 
     // rearrange inst

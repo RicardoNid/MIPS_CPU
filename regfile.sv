@@ -1,4 +1,8 @@
-//
+module regfile (
+        input logic cpu_clk,
+        input logic cpu_resetmodule regfile (
+        input logic cpu_clk,
+        input logic cpu_reset//
 
 import mips_cpu_pkg::*;
 
